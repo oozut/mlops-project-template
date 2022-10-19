@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/azureBlob.schema.json
+name: sahackaton
+type: azure_blob
+description: Credential-less datastore pointing to a blob container.
+account_name: sahackatonmetoffice
+container_name: satellite-data
