@@ -12,12 +12,12 @@ inputs:
   table_name: 'taximonitoring'
 
 outputs: 
-  train_data:
-  val_data:
-  test_data:
-  trained_model:
-  evaluation_output:
-  model_info_output_path:
+  train_data: azureml:sahackaton/train_data
+  val_data: azureml:sahackaton/val_data
+  test_data: azureml:sahackaton/test_data
+  trained_model: azureml:sahackaton/train_model
+  evaluation_output: azureml:sahackaton/evaluation_output
+  model_info_output_path: azureml:sahackaton/model_info_output_path
 # </inputs_and_outputs>
 
 # <jobs>
