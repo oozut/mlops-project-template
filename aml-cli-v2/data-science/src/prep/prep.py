@@ -70,7 +70,7 @@ def main(args):
 
     #data = pd.read_csv((Path(args.raw_data) / 'sahackaton' / 'taxi' / 'taxi-data.csv'))
     
-    data = pd.read_csv(args.raw_data)
+    data = pd.read_csv(Path(args.raw_data) /'labelled_ecmwf_newdataset_csv.csv')
     data = data[NUMERIC_COLS + CAT_NOM_COLS + CAT_ORD_COLS + [TARGET_COL]]
 
     # ------------- Split Data ------------- #
