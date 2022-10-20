@@ -53,17 +53,17 @@ def parse_args():
     parser.add_argument("--val_data", type=str, help="Path to test dataset")
     parser.add_argument("--test_data", type=str, help="Path to test dataset")
     
-    parser.add_argument("--enable_monitoring", type=str, help="enable logging to ADX")
-    parser.add_argument("--table_name", type=str, default="mlmonitoring", help="Table name in ADX for logging")
+    # parser.add_argument("--enable_monitoring", type=str, help="enable logging to ADX")
+    # parser.add_argument("--table_name", type=str, default="mlmonitoring", help="Table name in ADX for logging")
     
     args = parser.parse_args()
 
     return args
 
-def log_training_data(df, table_name):
-    from obs.collector import Online_Collector
-    collector = Online_Collector(table_name)
-    collector.batch_collect(df)
+# def log_training_data(df, table_name):
+#     from obs.collector import Online_Collector
+#     collector = Online_Collector(table_name)
+#     collector.batch_collect(df)
 
 def main(args):
     '''Read, split, and save datasets'''
@@ -75,7 +75,7 @@ def main(args):
     arr = os.listdir(args.raw_data)
     print(arr)
 
-    data = pd.read_csv((Path(args.raw_data) / 'taxi-data.csv'))
+    data = pd.read_csv((Path(args.raw_data) / 'sahackaton' / 'taxi' / 'taxi-data.csv'))
     data = data[NUMERIC_COLS + CAT_NOM_COLS + CAT_ORD_COLS + [TARGET_COL]]
 
     # ------------- Split Data ------------- #
@@ -101,8 +101,8 @@ def main(args):
     val.to_parquet((Path(args.val_data) / "val.parquet"))
     test.to_parquet((Path(args.test_data) / "test.parquet"))
 
-    if (args.enable_monitoring.lower == 'true' or args.enable_monitoring == '1' or args.enable_monitoring.lower == 'yes'):
-        log_training_data(data, args.table_name)
+    # if (args.enable_monitoring.lower == 'true' or args.enable_monitoring == '1' or args.enable_monitoring.lower == 'yes'):
+    #     log_training_data(data, args.table_name)
 
 
 if __name__ == "__main__":

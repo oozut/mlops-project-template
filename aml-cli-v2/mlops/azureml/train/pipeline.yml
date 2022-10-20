@@ -7,18 +7,30 @@ description: Training Pipeline to train a model that predicts taxi fare price
 inputs:
   input: #using local data, will create an anonymous data asset
     type: uri_folder
-    path: ../../../data/
+    path: azureml:taxi:1
+    mode: download
   enable_monitoring: "false"
   table_name: 'taximonitoring'
 
-outputs: 
-  train_data: azureml:sahackaton/train_data
-  val_data: azureml:sahackaton/val_data
-  test_data: azureml:sahackaton/test_data
-  trained_model: azureml:sahackaton/train_model
-  evaluation_output: azureml:sahackaton/evaluation_output
-  model_info_output_path: azureml:sahackaton/model_info_output_path
-# </inputs_and_outputs>
+outputs:
+  train_data:
+  val_data:
+  test_data:
+  trained_model:
+  evaluation_output:
+  model_info_output_path:
+#     # type: uri_folder
+#     # path: azureml://subscriptions/01ab706b-54a9-4b69-b293-faa73b51e249/resourcegroups/Hackathon/workspaces/amlhackaton/datastores/sahackaton/paths/
+#     # mode: rw_mount
+#   
+#     # type: uri_folder
+#     # path: azureml://subscriptions/01ab706b-54a9-4b69-b293-faa73b51e249/resourcegroups/Hackathon/workspaces/amlhackaton/datastores/sahackaton/paths/
+#     # mode: rw_mount
+#   
+#     # type: uri_folder
+#     # path: azureml://subscriptions/01ab706b-54a9-4b69-b293-faa73b51e249/resourcegroups/Hackathon/workspaces/amlhackaton/datastores/sahackaton/paths/
+#     # mode: rw_mount
+# # </inputs_and_outputs>
 
 # <jobs>
 settings:
@@ -37,8 +49,8 @@ jobs:
       --train_data ${{outputs.train_data}}
       --val_data ${{outputs.val_data}}
       --test_data ${{outputs.test_data}}
-      --enable_monitoring ${{inputs.enable_monitoring}}
-      --table_name ${{inputs.table_name}}
+#      --enable_monitoring ${{inputs.enable_monitoring}}
+#      --table_name ${{inputs.table_name}}
     environment: azureml:classicalml@latest
     inputs:
       raw_data: ${{parent.inputs.input}}
