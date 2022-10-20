@@ -13,36 +13,29 @@ import pandas as pd
 
 import mlflow
 
-TARGET_COL = "cost"
+TARGET_COL = "ice"
 
 NUMERIC_COLS = [
-    "distance",
-    "dropoff_latitude",
-    "dropoff_longitude",
-    "passengers",
-    "pickup_latitude",
-    "pickup_longitude",
-    "pickup_weekday",
-    "pickup_month",
-    "pickup_monthday",
-    "pickup_hour",
-    "pickup_minute",
-    "pickup_second",
-    "dropoff_weekday",
-    "dropoff_month",
-    "dropoff_monthday",
-    "dropoff_hour",
-    "dropoff_minute",
-    "dropoff_second",
+    "divergence",
+    "frac_of_cloud_cover",
+    "ozone_mass_mixing_ratio",
+    "pot_vorticity",
+    "rel_hum",
+    "sp_cloud_ice_water_cont",
+    "sp_cloud_liquid_water_cont",
+    "sp_hum",
+    "sp_rain_water_cont",
+    "sp_snow_water_cont",
+    "temp",
+    "u_wind",
+    "v_wind",
+    "vert_vel",
+    "vorticity"
 ]
 
-CAT_NOM_COLS = [
-    "store_forward",
-    "vendor",
-]
+CAT_NOM_COLS = []
 
-CAT_ORD_COLS = [
-]
+CAT_ORD_COLS = []
 
 def parse_args():
     '''Parse input arguments'''
@@ -75,7 +68,9 @@ def main(args):
     arr = os.listdir(args.raw_data)
     print(arr)
 
-    data = pd.read_csv((Path(args.raw_data) / 'sahackaton' / 'taxi' / 'taxi-data.csv'))
+    #data = pd.read_csv((Path(args.raw_data) / 'sahackaton' / 'taxi' / 'taxi-data.csv'))
+    
+    data = pd.read_csv(args.raw_data)
     data = data[NUMERIC_COLS + CAT_NOM_COLS + CAT_ORD_COLS + [TARGET_COL]]
 
     # ------------- Split Data ------------- #

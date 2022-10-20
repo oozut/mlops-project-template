@@ -1,13 +1,13 @@
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
 type: pipeline
-experiment_name: taxi-fare-training
-description: Training Pipeline to train a model that predicts taxi fare price
+experiment_name: satLabel-training_classifier_balanced
+description: Training Pipeline to train a model for satellite labelling
 
 # <inputs_and_outputs>
 inputs:
   input: #using local data, will create an anonymous data asset
-    type: uri_folder
-    path: azureml:taxi:1
+    type: uri_file
+    path: azureml:ecwmflabeldlarge:1
     mode: download
   enable_monitoring: "false"
   table_name: 'taximonitoring'

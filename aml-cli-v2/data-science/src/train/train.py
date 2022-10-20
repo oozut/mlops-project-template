@@ -12,38 +12,33 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 
 import mlflow
 import mlflow.sklearn
 
-TARGET_COL = "cost"
+TARGET_COL = "ice"
 
 NUMERIC_COLS = [
-    "distance",
-    "dropoff_latitude",
-    "dropoff_longitude",
-    "passengers",
-    "pickup_latitude",
-    "pickup_longitude",
-    "pickup_weekday",
-    "pickup_month",
-    "pickup_monthday",
-    "pickup_hour",
-    "pickup_minute",
-    "pickup_second",
-    "dropoff_weekday",
-    "dropoff_month",
-    "dropoff_monthday",
-    "dropoff_hour",
-    "dropoff_minute",
-    "dropoff_second",
+    "divergence",
+    "frac_of_cloud_cover",
+    "ozone_mass_mixing_ratio",
+    "pot_vorticity",
+    "rel_hum",
+    "sp_cloud_ice_water_cont",
+    "sp_cloud_liquid_water_cont",
+    "sp_hum",
+    "sp_rain_water_cont",
+    "sp_snow_water_cont",
+    "temp",
+    "u_wind",
+    "v_wind",
+    "vert_vel",
+    "vorticity"
 ]
 
 CAT_NOM_COLS = [
-    "store_forward",
-    "vendor",
 ]
 
 CAT_ORD_COLS = [
@@ -86,13 +81,15 @@ def main(args):
     X_train = train_data[NUMERIC_COLS + CAT_NOM_COLS + CAT_ORD_COLS]
 
     # Train a Random Forest Regression Model with the training set
-    model = RandomForestRegressor(n_estimators = args.regressor__n_estimators,
+    model = RandomForestClassifier(n_estimators = args.regressor__n_estimators,
                                   bootstrap = args.regressor__bootstrap,
                                   max_depth = args.regressor__max_depth,
                                   max_features = args.regressor__max_features,
                                   min_samples_leaf = args.regressor__min_samples_leaf,
                                   min_samples_split = args.regressor__min_samples_split,
-                                  random_state=0)
+                                  random_state=0,
+                                  class_weight='balanced')
+
 
     # log model hyperparameters
     mlflow.log_param("model", "RandomForestRegressor")
